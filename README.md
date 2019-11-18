@@ -1,6 +1,6 @@
 # IoT Engineering
 ## Project Access Barrier
-
+* code is based on https://github.com/DexterInd/GrovePi/tree/master/Software/Python
 ## Introduction
 This project is part of the [IoT Engineering](../../../fhnw-iot) course.
 
