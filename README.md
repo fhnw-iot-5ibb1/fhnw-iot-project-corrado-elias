@@ -1,8 +1,5 @@
 # IoT Engineering
-## Project MY_TEAM_PROJECT_TITLE
-
-> *Note: Do not work on this repository right away.*<br/>
-> *[Create your copy or join a team by clicking this GitHub Classroom link](https://classroom.github.com/g/gALXMYRD).*
+## Project Access Barrier
 
 ## Introduction
 This project is part of the [IoT Engineering](../../../fhnw-iot) course.
@@ -14,11 +11,8 @@ This project is part of the [IoT Engineering](../../../fhnw-iot) course.
 * Both team members are able to explain the project.
 
 ### Team members
-* @MY_TEAM_PROJECT_GITHUB_USER_1, REAL_NAME_1
-* @MY_TEAM_PROJECT_GITHUB_USER_2, REAL_NAME_2
-
-## Deliverables
-The following deliverables are mandatory.
+* @corradoparisi, Corrado Parisi
+* @cintoros, Elias Schorr
 
 ### Source code
 Source code, Arduino C, JS or Python, committed to (this) project repo.
@@ -53,6 +47,3 @@ Working end-to-end prototype, "device to cloud", part of your 10' presentation.
 1) Sensor input on a IoT device triggers an event.
 2) The event or measurement shows up online, in an app or Web client.
 3) The event triggers actuator output on the same or on a separate IoT device.
-
-## Submission deadline
-Commit and push to (this) project repo before Demo Day, _13.01.2020, 00:00_.
