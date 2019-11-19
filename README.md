@@ -1,6 +1,12 @@
 # IoT Engineering
 ## Project Access Barrier
 * code is based on https://github.com/DexterInd/GrovePi/tree/master/Software/Python
+## Installation
+* `sudo apt install python3 pipenv`
+* `pipenv install -r requirements.txt`
+* `pinenv shell` maybe.
+
+#IoT Engineering Template
 ## Introduction
 This project is part of the [IoT Engineering](../../../fhnw-iot) course.
 
