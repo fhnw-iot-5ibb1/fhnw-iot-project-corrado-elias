@@ -1,10 +1,16 @@
 # IoT Engineering
 ## Project Access Barrier
 * code is based on https://github.com/DexterInd/GrovePi/tree/master/Software/Python
+
 ## Installation
-* `sudo apt install python3 pipenv`
-* `pipenv install -r requirements.txt`
-* `pinenv shell` maybe.
+1. `virtualenv venv`
+1. `source venv/bin/activate` (assumes bash is used)
+1. `pip install grovepi` (working versions can be taken from requirements.txt using `pip install -r requirements.txt`)
+
+## Run
+1. connect headers as specified
+1. `source venv/bin/activate` (assumes bash is used)
+1. run `python run.py`
 
 #IoT Engineering Template
 ## Introduction
