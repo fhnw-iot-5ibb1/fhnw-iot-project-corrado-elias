@@ -5,8 +5,8 @@ from grove.gpio import GPIO
 from grove.grove_ultrasonic_ranger import GroveUltrasonicRanger
 
 # Connect the Grove Ultrasonic Ranger to digital port A0 and A2
-ultrasonic_ranger_1 = GroveUltrasonicRanger("A0")
-ultrasonic_ranger_2 = GroveUltrasonicRanger("A2")
+ultrasonic_ranger_1 = GroveUltrasonicRanger(14)
+ultrasonic_ranger_2 = GroveUltrasonicRanger(16)
 # Connect the Grove Buzzer to digital port D16
 buzzer = grovepi = GPIO(16, GPIO.OUT)
 # Connect first LED in Chainable RGB LED chain to digital port D7; In: CI,DI,VCC,GND ; Out: CO,DO,VCC,GND
