@@ -3,6 +3,7 @@
 * code is based on https://github.com/DexterInd/GrovePi/tree/master/Software/Python
 
 ## Installation
+1. `sudo apt-get install python3-venv`
 1. `python -m venv venv`
 1. `source venv/bin/activate` (assumes bash is used)
 1. `pip install grovepi` (working versions can be taken from requirements.txt using `pip install -r requirements.txt`)
