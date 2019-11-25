@@ -70,11 +70,11 @@ def loop():
     while True:
         try:
             # Read distance value from Ultrasonic
-            print(ultrasonic_ranger_1.read())
-            print(ultrasonic_ranger_2.read())
+            print(ultrasonic_ranger_1.get_distance())
+            print(ultrasonic_ranger_2.get_distance())
 
-            new_ultrasonic_ranger_1 = (ultrasonic_ranger_1.read()) < 120
-            new_ultrasonic_ranger_2 = (ultrasonic_ranger_2.read()) < 120
+            new_ultrasonic_ranger_1 = (ultrasonic_ranger_1.get_distance()) < 120
+            new_ultrasonic_ranger_2 = (ultrasonic_ranger_2.get_distance()) < 120
             if last_ultrasonic_ranger_1 and new_ultrasonic_ranger_2 and not last_ultrasonic_ranger_2:
                 entry()
             elif last_ultrasonic_ranger_2 and new_ultrasonic_ranger_1 and not last_ultrasonic_ranger_1:
