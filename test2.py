@@ -3,14 +3,6 @@ import time
 from grove.gpio import GPIO
 from grove.grove_ultrasonic_ranger import GroveUltrasonicRanger
 
-print('Detecting distance...')
-while True:
-    print('{} cm'.format(sonar.get_distance()))
-    time.sleep(1)
-led = GPIO(12, GPIO.OUT)
-button = GPIO(22, GPIO.IN)
-
-
 def doIt(i: int):
     doItV3(i)
 
