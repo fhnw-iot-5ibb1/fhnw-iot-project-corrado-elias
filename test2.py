@@ -1,12 +1,21 @@
 import time
 
 from grove.gpio import GPIO
+from grove.grove_ultrasonic_ranger import GroveUltrasonicRanger
 
+print('Detecting distance...')
+while True:
+    print('{} cm'.format(sonar.get_distance()))
+    time.sleep(1)
 led = GPIO(12, GPIO.OUT)
 button = GPIO(22, GPIO.IN)
 
 
 def doIt(i: int):
+    doItV1(i)
+
+
+def doItV1(i: int):
     print(i)
     grovepi = GPIO(i, GPIO.OUT)
     grovepi.write(1)
@@ -25,9 +34,15 @@ def doItV2(i: int):
     time.sleep(1)
 
 
+def doItV3(i: int):
+    sonar = GroveUltrasonicRanger(i)  # pin12, slot D12
+    print('{} cm'.format(sonar.get_distance()))
+    time.sleep(1)
+
+
 if __name__ == '__main__':
-    doItV2(16)
-    doItV2(5)
-    doItV2(0)
-    doItV2(2)
-    doItV2(4)
+    doIt(16)
+    doIt(5)
+    doIt(0)
+    doIt(2)
+    doIt(4)
