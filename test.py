@@ -6,25 +6,14 @@ import grovepi
 # SIG,NC,VCC,GND
 buzzer = 5
 
-grovepi.pinMode(buzzer, "OUTPUT")
-
 if __name__ == '__main__':
-    # Buzz for 1 second
-    grovepi.digitalWrite(buzzer, 1)
-    print('start')
-    time.sleep(2)
-
-    # Stop buzzing for 1 second and repeat
-    grovepi.digitalWrite(buzzer, 0)
-    print('stop')
-    time.sleep(2)
-
-    # Buzz for 1 second
-    grovepi.digitalWrite(buzzer, 1)
-    print('start')
-    time.sleep(2)
-
-    # Stop buzzing for 1 second and repeat
-    grovepi.digitalWrite(buzzer, 0)
-    print('stop')
-    time.sleep(2)
+    for i in range(0, 20):
+        print(i, i ** 2)
+        grovepi.pinMode(i, "OUTPUT")
+        grovepi.digitalWrite(buzzer, 1)
+        print('start')
+        time.sleep(1)
+        # Stop buzzing for 1 second and repeat
+        grovepi.digitalWrite(buzzer, 0)
+        print('stop')
+        time.sleep(1)
