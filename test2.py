@@ -3,11 +3,12 @@ import time
 from grove.gpio import GPIO
 from grove.grove_ultrasonic_ranger import GroveUltrasonicRanger
 
-def doIt(i: int):
+
+def doIt(i):
     doItV3(i)
 
 
-def doItV1(i: int):
+def doItV1(i):
     print(i)
     grovepi = GPIO(i, GPIO.OUT)
     grovepi.write(1)
@@ -19,14 +20,14 @@ def doItV1(i: int):
     time.sleep(1)
 
 
-def doItV2(i: int):
+def doItV2(i):
     print(i)
     grovepi = GPIO(i, GPIO.OUT)
     print(grovepi.read())
     time.sleep(1)
 
 
-def doItV3(i: int):
+def doItV3(i):
     sonar = GroveUltrasonicRanger(i)  # pin12, slot D12
     print('{} cm'.format(sonar.get_distance()))
     time.sleep(1)
@@ -35,6 +36,6 @@ def doItV3(i: int):
 if __name__ == '__main__':
     doIt(16)
     doIt(5)
-    doIt(0)
-    doIt(2)
-    doIt(4)
+    doIt("A0")
+    doIt("A2")
+    doIt("A4")
