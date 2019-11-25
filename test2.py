@@ -12,7 +12,7 @@ button = GPIO(22, GPIO.IN)
 
 
 def doIt(i: int):
-    doItV1(i)
+    doItV3(i)
 
 
 def doItV1(i: int):
