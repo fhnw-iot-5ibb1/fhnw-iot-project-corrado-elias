@@ -1,22 +1,16 @@
 import datetime
 import time
 
-import grovepi
+from grove.gpio import GPIO
+from grove.grove_ultrasonic_ranger import GroveUltrasonicRanger
 
-# Connect the Grove Ultrasonic Ranger to digital port D4 SIG,NC,VCC,GND
-ultrasonic_ranger_1 = 4
-ultrasonic_ranger_2 = 4
-# Connect the Grove Buzzer to digital port D8 SIG,NC,VCC,GND
-buzzer = 8
+# Connect the Grove Ultrasonic Ranger to digital port A0 and A2
+ultrasonic_ranger_1 = GroveUltrasonicRanger(0)
+ultrasonic_ranger_2 = GroveUltrasonicRanger(2)
+# Connect the Grove Buzzer to digital port D16
+buzzer = grovepi = GPIO(16, GPIO.OUT)
 # Connect first LED in Chainable RGB LED chain to digital port D7; In: CI,DI,VCC,GND ; Out: CO,DO,VCC,GND
-ledPin = 7
-# I have 10 LEDs connected in series with the first connected to the GrovePi and the last not connected
-# First LED input socket connected to GrovePi, output socket connected to second LED input and so on
-numleds = 2  # If you only plug 1 LED, change 10 to 1
-
-grovepi.pinMode(ledPin, "OUTPUT")
-grovepi.pinMode(buzzer, "OUTPUT")
-grovepi.chainableRgbLed_init(ledPin, numleds)
+led = GPIO(5, GPIO.OUT)
 
 # variable states
 alarmActive = False
@@ -44,10 +38,10 @@ def triggerAlarm():
     global buzzerActive, testColor
     # whee u whee u
     buzzerActive = (buzzerActive + 1) % 2
-    grovepi.digitalWrite(buzzer, 1)
+    buzzer.write(buzzerActive)
     # switch test colors used in grovepi.chainableRgbLed_test()
-    testColor = (testColor + 1) % 8
-    grovepi.chainableRgbLed_test(ledPin, numleds, testColor)
+    testColor = (testColor + 1) % 2
+    led.write(testColor)
 
 
 def entry():
@@ -66,16 +60,21 @@ def exit():
     alarmActive = False
 
 
+def clear():
+    buzzer.write(0)
+    led.write(0)
+
+
 def loop():
     global last_ultrasonic_ranger_1, last_ultrasonic_ranger_2
     while True:
         try:
             # Read distance value from Ultrasonic
-            print(grovepi.ultrasonicRead(ultrasonic_ranger_1))
-            print(grovepi.ultrasonicRead(ultrasonic_ranger_2))
+            print(ultrasonic_ranger_1.read())
+            print(ultrasonic_ranger_2.read())
 
-            new_ultrasonic_ranger_1 = grovepi.ultrasonicRead(ultrasonic_ranger_1) < 120
-            new_ultrasonic_ranger_2 = grovepi.ultrasonicRead(ultrasonic_ranger_2) < 120
+            new_ultrasonic_ranger_1 = (ultrasonic_ranger_1.read()) < 120
+            new_ultrasonic_ranger_2 = (ultrasonic_ranger_2.read()) < 120
             if last_ultrasonic_ranger_1 and new_ultrasonic_ranger_2 and not last_ultrasonic_ranger_2:
                 entry()
             elif last_ultrasonic_ranger_2 and new_ultrasonic_ranger_1 and not last_ultrasonic_ranger_1:
@@ -86,18 +85,19 @@ def loop():
             if alarmActive:
                 triggerAlarm()
             # TODO test time to sleep
-            time.sleep(.5)
+            time.sleep(1)
 
         except KeyboardInterrupt:
             print("KeyboardInterrupt")
-            grovepi.digitalWrite(buzzer, 0)
-            grovepi.chainableRgbLed_test(ledPin, numleds, 0)
+            clear()
             break
         except TypeError:
             print("TypeError")
+            clear()
             break
         except IOError:
             print("IOError")
+            clear()
             break
 
 
