@@ -19,11 +19,11 @@ buzzerActive = 0
 testColor = 0
 last_ultrasonic_ranger_1 = False
 last_ultrasonic_ranger_2 = False
-# TODO test trigger distance
 trigger_distance = 120
 
 time_a = datetime.time(6, 0)
 time_b = datetime.time(5, 00)
+delay = 0.1
 
 
 def isNowInTimePeriod(startTime, endTime, nowTime):
@@ -42,8 +42,8 @@ def triggerAlarm():
     global buzzerActive, testColor
 
     # whee u whee u
-    # buzzerActive = (buzzerActive + 1) % 2
-    # buzzer.write(buzzerActive)
+    buzzerActive = (buzzerActive + 1) % 2
+    buzzer.write(buzzerActive)
 
     if testColor:
         led.on()
@@ -87,7 +87,7 @@ def loop():
 
             if alarmActive:
                 triggerAlarm()
-            time.sleep(0.5)
+            time.sleep(delay)
         finally:
             clear()
 
