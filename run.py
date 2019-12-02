@@ -21,6 +21,9 @@ last_ultrasonic_ranger_2 = False
 # TODO test trigger distance
 trigger_distance = 120
 
+time_a = datetime.time(6, 0)
+time_b = datetime.time(5, 00)
+
 
 def isNowInTimePeriod(startTime, endTime, nowTime):
     if startTime < endTime:
@@ -31,14 +34,16 @@ def isNowInTimePeriod(startTime, endTime, nowTime):
 
 def isBadTime():
     # Test case when range crosses midnight
-    return isNowInTimePeriod(datetime.time(23, 0), datetime.time(5, 00), datetime.datetime.now().time())
+    return isNowInTimePeriod(time_a, time_b, datetime.datetime.now().time())
 
 
 def triggerAlarm():
     global buzzerActive, testColor
+
     # whee u whee u
     # buzzerActive = (buzzerActive + 1) % 2
     # buzzer.write(buzzerActive)
+
     # switch test colors used in grovepi.chainableRgbLed_test()
     testColor = (testColor + 1) % 8
     led.write(testColor)
@@ -48,7 +53,6 @@ def entry():
     global alarmActive
     # TODO send to firebase or whatever
     print("entry")
-    # TODO only trigger based on time
     if (isBadTime()):
         alarmActive = True
 
@@ -69,10 +73,6 @@ def loop():
     global last_ultrasonic_ranger_1, last_ultrasonic_ranger_2
     while True:
         try:
-            # Read distance value from Ultrasonic
-            print(ultrasonic_ranger_1.get_distance())
-            print(ultrasonic_ranger_2.get_distance())
-
             new_ultrasonic_ranger_1 = (ultrasonic_ranger_1.get_distance()) < 120
             new_ultrasonic_ranger_2 = (ultrasonic_ranger_2.get_distance()) < 120
             if last_ultrasonic_ranger_1 and new_ultrasonic_ranger_2 and not last_ultrasonic_ranger_2:
@@ -84,8 +84,7 @@ def loop():
 
             if alarmActive:
                 triggerAlarm()
-            # TODO test time to sleep
-            time.sleep(1)
+            time.sleep(0.5)
         finally:
             clear()
 
