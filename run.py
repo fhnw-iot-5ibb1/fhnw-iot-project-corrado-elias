@@ -1,4 +1,5 @@
 import datetime
+import time
 
 from grove.gpio import GPIO
 from grove.grove_ultrasonic_ranger import GroveUltrasonicRanger
