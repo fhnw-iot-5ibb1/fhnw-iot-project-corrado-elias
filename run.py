@@ -1,5 +1,4 @@
 import datetime
-import time
 
 from grove.gpio import GPIO
 from grove.grove_ultrasonic_ranger import GroveUltrasonicRanger
@@ -31,7 +30,7 @@ def isNowInTimePeriod(startTime, endTime, nowTime):
 
 def isBadTime():
     # Test case when range crosses midnight
-    return isNowInTimePeriod(time.time(23, 0), time.time(5, 00), datetime.datetime.utcnow().time())
+    return isNowInTimePeriod(datetime.time(23, 0), datetime.time(5, 00), datetime.datetime.now().time())
 
 
 def triggerAlarm():
