@@ -45,13 +45,11 @@ def triggerAlarm():
     # buzzerActive = (buzzerActive + 1) % 2
     # buzzer.write(buzzerActive)
 
-    # switch test colors used in grovepi.chainableRgbLed_test()
-    if ((testColor) % 2):
+    if testColor:
         led.on()
     else:
         led.off()
-    testColor = (testColor + 1) % 8
-    led.write(testColor)
+    testColor = (testColor + 1) % 2
 
 
 def entry():
