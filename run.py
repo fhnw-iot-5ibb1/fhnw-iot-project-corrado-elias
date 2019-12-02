@@ -2,6 +2,7 @@ import datetime
 import time
 
 from grove.gpio import GPIO
+from grove.grove_led import GroveLed
 from grove.grove_ultrasonic_ranger import GroveUltrasonicRanger
 
 # Connect the Grove Ultrasonic Ranger to digital port D5 and D16
@@ -10,7 +11,7 @@ ultrasonic_ranger_2 = GroveUltrasonicRanger(16)
 # Connect the Grove Buzzer to digital port 6
 buzzer = grovepi = GPIO(6, GPIO.OUT)
 # Connect first LED in Chainable RGB LED chain to digital port 17
-led = GPIO(17, GPIO.OUT)
+led = GroveLed(17)
 
 # variable states
 alarmActive = False
@@ -45,6 +46,10 @@ def triggerAlarm():
     # buzzer.write(buzzerActive)
 
     # switch test colors used in grovepi.chainableRgbLed_test()
+    if ((testColor) % 2):
+        led.on()
+    else:
+        led.off()
     testColor = (testColor + 1) % 8
     led.write(testColor)
 
