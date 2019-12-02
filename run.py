@@ -86,19 +86,8 @@ def loop():
                 triggerAlarm()
             # TODO test time to sleep
             time.sleep(1)
-
-        except KeyboardInterrupt:
-            print("KeyboardInterrupt")
+        finally:
             clear()
-            break
-        except TypeError:
-            print("TypeError")
-            clear()
-            break
-        except IOError:
-            print("IOError")
-            clear()
-            break
 
 
 if __name__ == '__main__':
