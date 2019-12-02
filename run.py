@@ -31,7 +31,7 @@ def isNowInTimePeriod(startTime, endTime, nowTime):
 
 def isBadTime():
     # Test case when range crosses midnight
-    return isNowInTimePeriod(time(23, 0), time(5, 00), datetime.utcnow().time())
+    return isNowInTimePeriod(time.time(23, 0), time.time(5, 00), datetime.datetime.utcnow().time())
 
 
 def triggerAlarm():
