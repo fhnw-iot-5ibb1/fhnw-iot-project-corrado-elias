@@ -37,10 +37,10 @@ def isBadTime():
 def triggerAlarm():
     global buzzerActive, testColor
     # whee u whee u
-    buzzerActive = (buzzerActive + 1) % 2
-    buzzer.write(buzzerActive)
+    # buzzerActive = (buzzerActive + 1) % 2
+    # buzzer.write(buzzerActive)
     # switch test colors used in grovepi.chainableRgbLed_test()
-    testColor = (testColor + 1) % 2
+    testColor = (testColor + 1) % 8
     led.write(testColor)
 
 
