@@ -1,17 +1,14 @@
 # IoT Engineering
 ## Project Access Barrier
-* code is based on https://github.com/DexterInd/GrovePi/tree/master/Software/Python
+* code is based on: 
+   - https://github.com/Seeed-Studio/grove.py
+   - https://community.thingspeak.com/tutorials/update-a-thingspeak-channel-using-mqtt-on-a-raspberry-pi/
 
 ## Installation
-1. `sudo apt-get install python3-venv`
-1. `curl -kL dexterindustries.com/update_grovepi | bash`
-1. `python -m venv venv`
-1. `source venv/bin/activate` (assumes bash is used)
-1. `pip install grovepi` (working versions can be taken from requirements.txt using `pip install -r requirements.txt`)
-
+1. `curl -sL https://github.com/Seeed-Studio/grove.py/raw/master/install.sh | sudo bash -s -`
+1. `sudo apt install sudo apt install python3-paho-mqtt`
 ## Run
 1. connect headers as specified
-1. `source venv/bin/activate` (assumes bash is used)
 1. run `python run.py`
 
 #IoT Engineering Template
