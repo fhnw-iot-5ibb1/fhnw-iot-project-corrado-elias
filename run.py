@@ -2,7 +2,6 @@ from __future__ import print_function
 
 import datetime
 import paho.mqtt.publish as publish
-import psutil
 import time
 from grove.gpio import GPIO
 from grove.grove_led import GroveLed
@@ -58,7 +57,7 @@ def triggerAlarm():
 def entry():
     global alarmActive
     # attempt to publish this data to the topic
-    publish.single(topic, payload="field1=" + 1, hostname=mqttHost, port=tPort, tls=tTLS, transport=tTransport)
+    publish.single(topic, payload="field1=1", hostname=mqttHost, port=tPort, tls=tTLS, transport=tTransport)
     print("entry")
     if (isBadTime()):
         alarmActive = True
@@ -67,7 +66,7 @@ def entry():
 def exit():
     global alarmActive
     # attempt to publish this data to the topic
-    publish.single(topic, payload="field1=" + 1, hostname=mqttHost, port=tPort, tls=tTLS, transport=tTransport)
+    publish.single(topic, payload="field2=1", hostname=mqttHost, port=tPort, tls=tTLS, transport=tTransport)
     print("exit")
     alarmActive = False
 
