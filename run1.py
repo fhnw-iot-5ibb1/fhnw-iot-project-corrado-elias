@@ -8,7 +8,6 @@ import paho.mqtt.publish as publish
 import requests
 from flask import Flask
 from grove.gpio import GPIO
-from grove.grove_led import GroveLed
 from grove.grove_ultrasonic_ranger import GroveUltrasonicRanger
 
 # Connect the Grove Ultrasonic Ranger to digital port D5 and D16
@@ -17,7 +16,7 @@ ultrasonic_ranger_2 = GroveUltrasonicRanger(16)
 # Connect the Grove Buzzer to digital port 6
 buzzer = GPIO(6, GPIO.OUT)
 # Connect first LED in Chainable RGB LED chain to digital port 17
-led = GroveLed(17)
+led = GPIO(17, GPIO.OUT)
 
 # variable states
 alarmActive = False
@@ -50,13 +49,9 @@ def triggerAlarm():
 
     # whee u whee u
     buzzerActive = (buzzerActive + 1) % 2
-    buzzer.write(buzzerActive)
-
-    if testColor:
-        led.on()
-    else:
-        led.off()
     testColor = (testColor + 1) % 2
+    buzzer.write(buzzerActive)
+    led.write(testColor)
 
 
 def entry():

@@ -6,7 +6,6 @@ import time
 import requests
 from flask import Flask
 from grove.gpio import GPIO
-from grove.grove_led import GroveLed
 
 app = Flask(__name__)
 # Connect the Grove button to digital port 5
@@ -15,7 +14,7 @@ button = GPIO(5, GPIO.OUT)
 # Connect the Grove Buzzer to digital port 6
 buzzer = GPIO(6, GPIO.OUT)
 # Connect first LED in Chainable RGB LED chain to D16
-led = GroveLed(16)
+led = GPIO(16, GPIO.OUT)
 
 # variable states
 alarmActive = False
@@ -30,13 +29,9 @@ def triggerAlarm():
 
     # whee u whee u
     buzzerActive = (buzzerActive + 1) % 2
-    buzzer.write(buzzerActive)
-
-    if testColor:
-        led.on()
-    else:
-        led.off()
     testColor = (testColor + 1) % 2
+    buzzer.write(buzzerActive)
+    buzzer.write(testColor)
 
 
 def clear():
