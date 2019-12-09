@@ -7,9 +7,14 @@
 ## Installation
 1. `curl -sL https://github.com/Seeed-Studio/grove.py/raw/master/install.sh | sudo bash -s -`
 1. `sudo apt install sudo apt install python3-paho-mqtt`
-## Run
-1. connect headers as specified
-1. run `python run.py`
+## Run 1
+1. ssh pi@raspi1
+1. connect headers (pins) as specified
+1. run `python run1.py`
+## Run 2 
+1. ssh pi@raspi2
+1. connect headers (pins) as specified
+1. run `python run2.py`
 
 #IoT Engineering Template
 ## Introduction
