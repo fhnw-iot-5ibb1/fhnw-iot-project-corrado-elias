@@ -5,7 +5,7 @@
    - https://community.thingspeak.com/tutorials/update-a-thingspeak-channel-using-mqtt-on-a-raspberry-pi/
 
 ## Installation
-1. `sudo apt install python3-paho-mqtt python3-flask`
+1. `sudo apt install python3-paho-mqtt python3-flask python3-pip`
 1. `curl -sL https://github.com/Seeed-Studio/grove.py/raw/master/install.sh | sudo bash -s -`
 
 ## Run 1
