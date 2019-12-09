@@ -11,9 +11,9 @@ from grove.grove_led import GroveLed
 app = Flask(__name__)
 # Connect the Grove button to digital port 5
 # TODO replace with button
-buzzer = grovepi = GPIO(5, GPIO.OUT)
+button = GPIO(5, GPIO.OUT)
 # Connect the Grove Buzzer to digital port 6
-buzzer = grovepi = GPIO(5, GPIO.OUT)
+buzzer = GPIO(6, GPIO.OUT)
 # Connect first LED in Chainable RGB LED chain to D16
 led = GroveLed(16)
 
@@ -45,12 +45,12 @@ def clear():
 
 
 def loop():
-    global last_ultrasonic_ranger_1, last_ultrasonic_ranger_2
     while True:
         try:
             if alarmActive:
                 triggerAlarm()
-            # TODO deactivate if button pressed
+            if button.read():
+                kill_alarm()
             time.sleep(delay)
         finally:
             clear()
@@ -62,6 +62,9 @@ def trigger_alarm():
 
 
 def kill_alarm():
+    global alarmActive
+    alarmActive = False
+    clear()
     requests.get('http://raspi1:5000/kill_alarm')
 
 
