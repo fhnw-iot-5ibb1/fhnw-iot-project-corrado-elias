@@ -1,8 +1,12 @@
 from __future__ import print_function
 
 import datetime
-import paho.mqtt.publish as publish
+import threading
 import time
+
+import paho.mqtt.publish as publish
+import requests
+from flask import Flask
 from grove.gpio import GPIO
 from grove.grove_led import GroveLed
 from grove.grove_ultrasonic_ranger import GroveUltrasonicRanger
@@ -26,6 +30,8 @@ trigger_distance = 120
 time_a = datetime.time(6, 0)
 time_b = datetime.time(5, 00)
 delay = 0.1
+
+app = Flask(__name__)
 
 
 def isNowInTimePeriod(startTime, endTime, nowTime):
@@ -60,15 +66,14 @@ def entry():
     publish.single(topic, payload="field1=1", hostname=mqttHost, port=tPort, tls=tTLS, transport=tTransport)
     print("entry")
     if (isBadTime()):
+        requests.get('http://raspi1:5000/trigger_alarm')
         alarmActive = True
 
 
 def exit():
-    global alarmActive
     # attempt to publish this data to the topic
     publish.single(topic, payload="field2=1", hostname=mqttHost, port=tPort, tls=tTLS, transport=tTransport)
     print("exit")
-    alarmActive = False
 
 
 def clear():
@@ -94,6 +99,14 @@ def loop():
             time.sleep(delay)
         finally:
             clear()
+
+
+@app.route("/kill_alarm")
+def kill_alarm():
+    global alarmActive
+    alarmActive = False
+    publish.single(topic, payload="field3=1", hostname=mqttHost, port=tPort, tls=tTLS, transport=tTransport)
+    return "kill_alarm"
 
 
 def setupMqtt():
@@ -148,4 +161,8 @@ def setupMqtt():
 
 if __name__ == '__main__':
     setupMqtt()
+    print('Started runner')
+    thread = threading.Thread(target=loop)
+    thread.start()
+    app.run(host="0.0.0.0")
     loop()
