@@ -50,7 +50,7 @@ def triggerAlarm():
     # whee u whee u
     buzzerActive = (buzzerActive + 1) % 2
     testColor = (testColor + 1) % 2
-    buzzer.write(buzzerActive)
+    # buzzer.write(buzzerActive)
     led.write(testColor)
 
 
@@ -69,7 +69,7 @@ def exit():
 
 
 def clear():
-    # buzzer.write(0)
+    buzzer.write(0)
     led.write(0)
 
 

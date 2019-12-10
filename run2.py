@@ -30,12 +30,12 @@ def triggerAlarm():
     # whee u whee u
     buzzerActive = (buzzerActive + 1) % 2
     testColor = (testColor + 1) % 2
-    buzzer.write(buzzerActive)
-    buzzer.write(testColor)
+    # buzzer.write(buzzerActive)
+    led.write(testColor)
 
 
 def clear():
-    # buzzer.write(0)
+    buzzer.write(0)
     led.write(0)
 
 
@@ -44,7 +44,7 @@ def loop():
         try:
             if alarmActive:
                 triggerAlarm()
-                print(button.read)
+                print(button.read())
             if button.read():
                 kill_alarm()
             time.sleep(delay)
