@@ -50,6 +50,7 @@ def triggerAlarm():
     # whee u whee u
     buzzerActive = (buzzerActive + 1) % 2
     testColor = (testColor + 1) % 2
+    # TODO @corrado activate for demo
     # buzzer.write(buzzerActive)
     led.write(testColor)
 

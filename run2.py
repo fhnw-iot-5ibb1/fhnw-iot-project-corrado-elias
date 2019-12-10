@@ -29,6 +29,7 @@ def triggerAlarm():
     # whee u whee u
     buzzerActive = (buzzerActive + 1) % 2
     testColor = (testColor + 1) % 2
+    # TODO @corrado activate for demo
     # buzzer.write(buzzerActive)
     led.write(testColor)
 
@@ -43,7 +44,6 @@ def loop():
         try:
             if alarmActive:
                 triggerAlarm()
-                print(button.read())
             if button.read():
                 kill_alarm()
             time.sleep(delay)
