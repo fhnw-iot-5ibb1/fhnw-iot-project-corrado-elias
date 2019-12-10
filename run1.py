@@ -10,12 +10,12 @@ from flask import Flask
 from grove.gpio import GPIO
 from grove.grove_ultrasonic_ranger import GroveUltrasonicRanger
 
-# Connect the Grove Ultrasonic Ranger to digital port D5 and D16
+# Connect the GroveUltrasonicRanger to D5 & D16
 ultrasonic_ranger_1 = GroveUltrasonicRanger(5)
 ultrasonic_ranger_2 = GroveUltrasonicRanger(16)
-# Connect the Grove Buzzer to digital port 6
+# Connect the buzzer to digital port 6
 buzzer = GPIO(6, GPIO.OUT)
-# Connect first LED in Chainable RGB LED chain to digital port 17
+# Connect led to digital port 17
 led = GPIO(17, GPIO.OUT)
 
 # variable states
