@@ -35,7 +35,7 @@ def triggerAlarm():
 
 
 def clear():
-    buzzer.write(0)
+    # buzzer.write(0)
     led.write(0)
 
 
@@ -44,6 +44,7 @@ def loop():
         try:
             if alarmActive:
                 triggerAlarm()
+                print(button.read)
             if button.read():
                 kill_alarm()
             time.sleep(delay)
@@ -53,12 +54,15 @@ def loop():
 
 @app.route("/trigger_alarm")
 def trigger_alarm():
+    global alarmActive
+    alarmActive = True
     return "trigger_alarm"
 
 
 def kill_alarm():
     global alarmActive
     alarmActive = False
+    print("kill_alarm")
     clear()
     requests.get('http://raspi1:5000/kill_alarm')
 

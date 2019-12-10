@@ -69,7 +69,7 @@ def exit():
 
 
 def clear():
-    buzzer.write(0)
+    # buzzer.write(0)
     led.write(0)
 
 
@@ -97,8 +97,9 @@ def loop():
 def kill_alarm():
     global alarmActive
     alarmActive = False
-    publish.single(topic, payload="field3=1", hostname=mqttHost, port=tPort, tls=tTLS, transport=tTransport)
     clear()
+    print("kill_alarm")
+    publish.single(topic, payload="field3=1", hostname=mqttHost, port=tPort, tls=tTLS, transport=tTransport)
     return "kill_alarm"
 
 
