@@ -10,6 +10,7 @@ from flask import Flask
 from grove.gpio import GPIO
 from grove.grove_ultrasonic_ranger import GroveUltrasonicRanger
 import logging
+
 # Connect the GroveUltrasonicRanger to D5 & D16
 ultrasonic_ranger_1 = GroveUltrasonicRanger(5)
 ultrasonic_ranger_2 = GroveUltrasonicRanger(16)
@@ -53,7 +54,7 @@ def entry():
     global alarmActive
     publish.single(topic, payload="field1=1", hostname=mqttHost, port=tPort, tls=tTLS, transport=tTransport)
     logging.info("entry")
-    if (is_bad_time()):
+    if is_bad_time():
         logging.info("bad_time: alarm triggered")
         requests.get('http://raspi2:5000/trigger_alarm')
         alarmActive = True
