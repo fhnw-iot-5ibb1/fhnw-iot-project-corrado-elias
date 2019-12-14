@@ -1,4 +1,4 @@
-from __future__ import print_function
+from __future__ import logging.info_function
 
 import datetime
 import threading
@@ -9,7 +9,7 @@ import requests
 from flask import Flask
 from grove.gpio import GPIO
 from grove.grove_ultrasonic_ranger import GroveUltrasonicRanger
-
+import logging
 # Connect the GroveUltrasonicRanger to D5 & D16
 ultrasonic_ranger_1 = GroveUltrasonicRanger(5)
 ultrasonic_ranger_2 = GroveUltrasonicRanger(16)
@@ -33,40 +33,35 @@ delay = 0.1
 app = Flask(__name__)
 
 
-def isNowInTimePeriod(startTime, endTime, nowTime):
-    if startTime < endTime:
-        return nowTime >= startTime and nowTime <= endTime
+def is_bad_time():
+    now_time = datetime.datetime.now().time()
+    if time_a < time_b:
+        return time_a <= now_time <= time_b
     else:
-        return nowTime >= startTime or nowTime <= endTime
+        return now_time >= time_a or now_time <= time_b
 
 
-def isBadTime():
-    return isNowInTimePeriod(time_a, time_b, datetime.datetime.now().time())
-
-
-def triggerAlarm():
+def whee_u_whee_u():
     global buzzerActive, testColor
-
-    # whee u whee u
     buzzerActive = (buzzerActive + 1) % 2
     testColor = (testColor + 1) % 2
-    # TODO @corrado activate for demo
-    # buzzer.write(buzzerActive)
+    buzzer.write(buzzerActive)
     led.write(testColor)
 
 
 def entry():
     global alarmActive
     publish.single(topic, payload="field1=1", hostname=mqttHost, port=tPort, tls=tTLS, transport=tTransport)
-    print("entry")
-    if (isBadTime()):
+    logging.info("entry")
+    if (is_bad_time()):
+        logging.info("bad_time: alarm triggered")
         requests.get('http://raspi2:5000/trigger_alarm')
         alarmActive = True
 
 
 def exit():
     publish.single(topic, payload="field2=1", hostname=mqttHost, port=tPort, tls=tTLS, transport=tTransport)
-    print("exit")
+    logging.info("exit")
 
 
 def clear():
@@ -76,8 +71,8 @@ def clear():
 
 def loop():
     global last_ultrasonic_ranger_1, last_ultrasonic_ranger_2
-    while True:
-        try:
+    try:
+        while True:
             new_ultrasonic_ranger_1 = (ultrasonic_ranger_1.get_distance()) < 120
             new_ultrasonic_ranger_2 = (ultrasonic_ranger_2.get_distance()) < 120
             if last_ultrasonic_ranger_1 and new_ultrasonic_ranger_2 and not last_ultrasonic_ranger_2:
@@ -88,10 +83,10 @@ def loop():
             last_ultrasonic_ranger_2 = new_ultrasonic_ranger_2
 
             if alarmActive:
-                triggerAlarm()
+                whee_u_whee_u()
             time.sleep(delay)
-        finally:
-            clear()
+    finally:
+        clear()
 
 
 @app.route("/kill_alarm")
@@ -99,12 +94,12 @@ def kill_alarm():
     global alarmActive
     alarmActive = False
     clear()
-    print("kill_alarm")
+    logging.info("kill_alarm")
     publish.single(topic, payload="field3=1", hostname=mqttHost, port=tPort, tls=tTLS, transport=tTransport)
     return "kill_alarm"
 
 
-def setupMqtt():
+def setup_mqtt():
     global topic, mqttHost, tPort, tTLS, tTransport
     channelID = "931380"
     apiKey = "PCLULCAKPMI6IU1J"
@@ -117,9 +112,8 @@ def setupMqtt():
 
 
 if __name__ == '__main__':
-    setupMqtt()
-    print('Started runner')
+    setup_mqtt()
+    logging.info('Started runner')
     thread = threading.Thread(target=loop)
     thread.start()
     app.run(host="0.0.0.0")
-    loop()
