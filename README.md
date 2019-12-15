@@ -13,8 +13,8 @@
 
 ## Run Pi 1
 1. ssh pi@raspi1
-1. run `python run1.py`
+1. run `systemctl enable run1.service && systemctl start run1.service`
 ## Run Pi 2 
 1. ssh pi@raspi2
-1. run `python run2.py`
+1. run `systemctl enable run2.service && systemctl start run2.service`
 

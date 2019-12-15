@@ -27,7 +27,7 @@ last_ultrasonic_ranger_1 = False
 last_ultrasonic_ranger_2 = False
 trigger_distance = 120
 
-time_a = datetime.time(6, 0)
+time_a = datetime.time(22, 0)
 time_b = datetime.time(5, 00)
 delay = 0.1
 
@@ -39,7 +39,7 @@ def is_bad_time():
     if time_a < time_b:
         return time_a <= now_time <= time_b
     else:
-        return now_time >= time_a or now_time <= time_b
+        return time_a <= now_time or now_time <= time_b
 
 
 def whee_u_whee_u():
@@ -53,16 +53,16 @@ def whee_u_whee_u():
 def entry():
     global alarmActive
     publish.single(topic, payload="field1=1", hostname=mqttHost, port=tPort, tls=tTLS, transport=tTransport)
-    logging.info("entry")
+    logging.info("entry detected")
     if is_bad_time():
-        logging.info("bad_time: alarm triggered")
+        logging.info("alarm triggered")
         requests.get('http://raspi2:5000/trigger_alarm')
         alarmActive = True
 
 
 def exit():
     publish.single(topic, payload="field2=1", hostname=mqttHost, port=tPort, tls=tTLS, transport=tTransport)
-    logging.info("exit")
+    logging.info("exit detected")
 
 
 def clear():
@@ -95,7 +95,7 @@ def kill_alarm():
     global alarmActive
     alarmActive = False
     clear()
-    logging.info("kill_alarm")
+    logging.info("alarm killed")
     publish.single(topic, payload="field3=1", hostname=mqttHost, port=tPort, tls=tTLS, transport=tTransport)
     return "kill_alarm"
 
@@ -114,7 +114,7 @@ def setup_mqtt():
 
 if __name__ == '__main__':
     setup_mqtt()
-    logging.info('Started runner')
+    logging.info('Started application')
     thread = threading.Thread(target=loop)
     thread.start()
     app.run(host="0.0.0.0")

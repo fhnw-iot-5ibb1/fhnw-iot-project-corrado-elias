@@ -66,7 +66,7 @@ def kill_alarm():
 
 
 if __name__ == "__main__":
-    logging.info('started runner')
+    logging.info('started application')
     thread = threading.Thread(target=loop)
     thread.start()
     app.run(host="0.0.0.0")
