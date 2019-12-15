@@ -10,6 +10,7 @@
 1. `sudo apt install python3-paho-mqtt python3-flask python3-pip python-pip python3-grove-py`
 1. `curl -sL https://github.com/Seeed-Studio/grove.py/raw/master/install.sh | sudo bash -s -`
 1. connect headers (pins) as specified
+1. move service files `cp run*.service /lib/systemd/system/`
 
 ## Run Pi 1
 1. ssh pi@raspi1
