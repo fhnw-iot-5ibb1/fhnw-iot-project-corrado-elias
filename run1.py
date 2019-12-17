@@ -17,19 +17,19 @@ buzzer = GPIO(6, GPIO.OUT)
 # Connect led to digital port 17
 led = GPIO(17, GPIO.OUT)
 
+app = Flask(__name__)
+
 # variable states
 alarmActive = False
 buzzerActive = 0
 testColor = 0
 last_ultrasonic_ranger_1 = False
 last_ultrasonic_ranger_2 = False
-trigger_distance = 120
 
+trigger_distance = 120
 time_a = datetime.time(22, 0)
 time_b = datetime.time(5, 00)
 delay = 0.1
-
-app = Flask(__name__)
 
 
 def is_bad_time():
