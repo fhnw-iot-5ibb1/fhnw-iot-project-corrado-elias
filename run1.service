@@ -6,8 +6,8 @@ After=network.target
 Type=simple
 Restart=always
 RestartSec=1
-User=admin
-ExecStart=/usr/bin/python3 /home/pi/fhnw-iot-project-corrado-elias/run1.py
+User=root
+ExecStart=python3 /home/pi/fhnw-iot-project-corrado-elias/run1.py
 
 [Install]
 WantedBy=multi-user.target
