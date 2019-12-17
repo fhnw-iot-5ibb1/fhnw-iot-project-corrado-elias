@@ -1,5 +1,3 @@
-from __future__ import logging.info_function
-
 import datetime
 import threading
 import time
