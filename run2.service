@@ -7,7 +7,7 @@ Type=simple
 Restart=always
 RestartSec=1
 User=admin
-ExecStart=python3 /home/pi/fhnw-iot-project-corrado-elias/run2.py
+ExecStart=/usr/bin/python3 /home/pi/fhnw-iot-project-corrado-elias/run2.py
 
 [Install]
 WantedBy=multi-user.target
