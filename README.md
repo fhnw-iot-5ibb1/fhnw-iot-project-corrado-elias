@@ -41,7 +41,7 @@ The Raspi2 is connected to a buzzer and a led.
 
 ![Raspi2](./docu/raspi2.jpg)
 
-Code for Raspi2 under ![Code Raspi1](./run2.py)
+Code for Raspi2 under ![Code Raspi2](./run2.py)
 Raspi2 service file: ![Raspi2 Service file](./run2.service)
 
 ## Run Pi 1
