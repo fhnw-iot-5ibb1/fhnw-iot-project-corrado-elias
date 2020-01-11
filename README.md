@@ -19,6 +19,9 @@ The Raspi1 is connected to 2 GroveUltrasonicRanger, a buzzer and a led.
 1. Connect the GroveUltrasonicRanger to D5 & D16
 1. Connect the buzzer to digital port 6
 1. Connect led to digital port 17
+1. ssh pi@raspi1
+1. run `sudo systemctl enable run1.service && sudo systemctl start run1.service`
+
 
 You can change this default values underneath in run1.py
 trigger_distance = 120 (trigger distance in centimeters)
@@ -38,6 +41,8 @@ The Raspi2 is connected to a buzzer and a led.
 1. Connect the button to D5
 1. Connect the buzzer to digital port 6
 1. Connect led to D16
+1. ssh pi@raspi2
+1. run `sudo systemctl enable run2.service && sudo systemctl start run2.service`
 
 ![Raspi2](./docu/raspi2.jpg)
 
@@ -48,14 +53,6 @@ Raspi2 service file: ![Raspi2 Service file](./run2.service)
 
 Configure both Raspis to be connected to the same network. For low latency communication it is recommended to connect 
 to the same access point. Use for instance wpa_supplicant.conf on both Raspis. 
-
-## Run Pi 1
-1. ssh pi@raspi1
-1. run `sudo systemctl enable run1.service && sudo systemctl start run1.service`
-
-## Run Pi 2 
-1. ssh pi@raspi2
-1. run `sudo systemctl enable run2.service && sudo systemctl start run2.service`
 
 ## ThingSpeak
 - https://thingspeak.com/channels/931380
