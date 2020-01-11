@@ -13,6 +13,9 @@
 1. move service files `sudo cp run*.service /lib/systemd/system/`
 
 ## Configuration for Pi 1
+
+The Raspi1 is connected to 2 GroveUltrasonicRanger, a buzzer and a led.
+
 1. Connect the GroveUltrasonicRanger to D5 & D16
 1. Connect the buzzer to digital port 6
 1. Connect led to digital port 17
@@ -23,10 +26,23 @@ time_a = datetime.time(22, 0)
 time_b = datetime.time(5, 00)
 delay = 0.1
 
+![Raspi1](./docu/raspi1.jpg)
+
+Code for Raspi1 under ![Code Raspi1](./run1.py)
+Raspi1 service file: ![Raspi1 Service file](./run1.service)
+
 ## Configuration for Pi 2
+
+The Raspi2 is connected to a buzzer and a led.
+
 1. Connect the button to D5
 1. Connect the buzzer to digital port 6
 1. Connect led to D16
+
+![Raspi2](./docu/raspi2.jpg)
+
+Code for Raspi2 under ![Code Raspi1](./run2.py)
+Raspi2 service file: ![Raspi2 Service file](./run2.service)
 
 ## Run Pi 1
 1. ssh pi@raspi1
