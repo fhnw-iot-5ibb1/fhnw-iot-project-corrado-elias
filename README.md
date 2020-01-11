@@ -44,6 +44,11 @@ The Raspi2 is connected to a buzzer and a led.
 Code for Raspi2 under ![Code Raspi2](./run2.py)
 Raspi2 service file: ![Raspi2 Service file](./run2.service)
 
+## WiFi
+
+Configure both Raspis to be connected to the same network. For low latency communication it is recommended to connect 
+to the same access point. Use for instance wpa_supplicant.conf on both Raspis. 
+
 ## Run Pi 1
 1. ssh pi@raspi1
 1. run `sudo systemctl enable run1.service && sudo systemctl start run1.service`
