@@ -57,3 +57,12 @@ to the same access point. Use for instance wpa_supplicant.conf on both Raspis.
 ## ThingSpeak
 - https://thingspeak.com/channels/931380
 
+## Presentation
+Presentation can be found under ![Presentation](./docu/IOT_Presi.pdf)
+
+## Reference model
+![Reference model](./docu/reference-model.png)
+
+## Interface documentation
+![Interface documentation](./docu/interface-documentation.png)
+
